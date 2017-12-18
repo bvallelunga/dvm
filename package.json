@@ -1,0 +1,27 @@
+{
+  "name": "Doppler",
+  "version": "1.0.0",
+  "description": "Doppler Virtual Machince",
+  "main": "server.coffee",
+  "engines": {
+    "node": "9.2.0",
+    "npm": "5.5.1"
+  },
+  "scripts": {
+    "prepare": "bash ./scripts/npm_prepare.sh"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "coffeescript": "^2.1.0",
+    "public-ip": "^2.3.5",
+    "request-promise": "^4.2.0",
+    "tensorflow2": "1.0.22",
+    "commander": "2.12.2",
+    "web3": "1.0.0-beta.26"
+  },
+  "devDependencies": {
+    "forever": "^0.15.2"
+  }
+}
