@@ -13,6 +13,7 @@ class BaseController(CementBaseController):
   class Meta:
     label = 'base'
     description = "Doppler Virtual Machine CLI"
+    usage = 'dvm [command] [arguments...]'
     arguments = [
       ( ['-v', '--version'], dict(action='version', version=BANNER) ),
     ]

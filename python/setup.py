@@ -1,12 +1,10 @@
 import os
 from setuptools import setup
 
-# Utility function to read the README file.
-# Used for the long_description.  It's nice, because now 1) we have a top level
-# README file and 2) it's easier to type in the README file than to put a raw
-# string in below ...
+
 def read(fname):
   return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
   name = "dvm",
@@ -14,13 +12,14 @@ setup(
   author_email = "dev@doppler.market",
   description = "Doppler Virtual Machine CLI",
   license = "Apache License 2.0",
-  long_description=read('README'),
+  long_description=read('README.md'),
   keywords = "doppler machine learning dvm",
   url = "http://packages.python.org/doppler-dvm",
   packages=['cli', 'tests'],
   install_requires=[
     "requests==2.8.1",
-    "cement"
+    "cement",
+    "colorlog"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",

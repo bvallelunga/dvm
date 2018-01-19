@@ -7,8 +7,9 @@ class WalletController(CementBaseController):
     label = 'wallet'
     stacked_on = 'base'
     stacked_type = 'nested'
+    usage = 'dvm wallet [command] [arguments...]'
     description = "Create or load a wallet address"
-    arguments=[
+    arguments = [
       (['arguments'], dict(action='store', nargs='*')),
     ]
 
@@ -20,10 +21,10 @@ class WalletController(CementBaseController):
   @expose(help="Register provided wallet with marketplace", aliases=["load [wallet address]"], aliases_only=True)
   def load(self):
     if len(self.app.pargs.arguments) == 0:
-      print("Please provide a wallet address")
+      self.app.log.error("Please provide a wallet address")
       return
       
-    print("Wallet saved:", self.app.pargs.extra_arguments[0])
+    print("Wallet saved:", self.app.pargs.arguments[0])
     
   
   @expose(help="Generate wallet and register it with the marketplace")
