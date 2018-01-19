@@ -1,6 +1,5 @@
 from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
-from cement.ext.ext_colorlog import ColorLogHandler
 
 from base.controller import BaseController
 from wallet.controller import WalletController
