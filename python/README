@@ -7,6 +7,11 @@ usage: app (sub-commands ...) [options ...] {arguments ...}
 
 Doppler Virtual Machine CLI
 
+commands:
+
+  wallet
+    Create or load a wallet address
+
 optional arguments:
   -h, --help     show this help message and exit
   --debug        toggle debug output
@@ -15,13 +20,16 @@ optional arguments:
 ```
 
 
-# Install DVM Locally
+# Test Locally
+
+1. Install dependencies
 
 ``` bash
-# Install Dependencies
 python3 setup.py install
-
-# Test CLI
-dvm --help 
 ```
 
+2. Run CLI locally
+
+``` bash
+python3 cli
+```
