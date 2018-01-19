@@ -1,11 +1,13 @@
 from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
 
+
 VERSION = '0.0.1'
 BANNER = """
 Doppler Virtual Machine v%s
 Copyright (c) 2018 Doppler Foundation
 """ % VERSION
+
 
 class BaseController(CementBaseController):
   class Meta:
