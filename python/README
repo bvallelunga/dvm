@@ -1,0 +1,27 @@
+# Entry Point
+
+``` bash
+$ dvm
+
+usage: app (sub-commands ...) [options ...] {arguments ...}
+
+Doppler Virtual Machine CLI
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --debug        toggle debug output
+  --quiet        suppress all output
+  -v, --version  show program's version number and exit
+```
+
+
+# Install DVM Locally
+
+``` bash
+# Install Dependencies
+python3 setup.py install
+
+# Test CLI
+dvm --help 
+```
+
