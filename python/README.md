@@ -3,7 +3,7 @@
 ``` bash
 $ dvm
 
-usage: app (sub-commands ...) [options ...] {arguments ...}
+usage: dvm [command] [arguments...]
 
 Doppler Virtual Machine CLI
 
