@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def read(fname):
@@ -15,11 +15,12 @@ setup(
   long_description=read('README.md'),
   keywords = "doppler machine learning dvm",
   url = "http://packages.python.org/doppler-dvm",
-  packages=['cli', 'tests'],
+  packages=find_packages(exclude=['docs', 'tests']),
   install_requires=[
     "requests==2.8.1",
     "cement",
-    "colorlog"
+    "colorlog",
+    "jsonmodels"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",

@@ -1,8 +1,11 @@
+#! python3
+
 from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
 
-from base.controller import BaseController
-from wallet.controller import WalletController
+from controllers.base import BaseController
+from controllers.auth import AuthController
+
 
 class App(CementApp):
   class Meta:
@@ -12,10 +15,10 @@ class App(CementApp):
     log_handler = 'colorlog'
     handlers = [
       BaseController,
-      WalletController
+      AuthController
     ]
-
-
+    
+    
 def main(args=None):
   with App() as app:
     app.run()

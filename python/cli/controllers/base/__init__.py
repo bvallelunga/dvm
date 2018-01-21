@@ -1,4 +1,3 @@
-from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
 
 
@@ -15,8 +14,9 @@ class BaseController(CementBaseController):
     description = "Doppler Virtual Machine CLI"
     usage = 'dvm [command] [arguments...]'
     arguments = [
-      ( ['-v', '--version'], dict(action='version', version=BANNER) ),
+      (['-v', '--version'], dict(action='version', version=BANNER))
     ]
+
 
   @expose(hide=True)
   def default(self):
