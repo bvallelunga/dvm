@@ -17,10 +17,11 @@ setup(
   url = "http://packages.python.org/doppler-dvm",
   packages=find_packages(exclude=['docs', 'tests']),
   install_requires=[
-    "requests==2.8.1",
+    "requests",
     "cement",
     "colorlog",
-    "jsonmodels"
+    "jsonmodels",
+    "json"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",

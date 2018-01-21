@@ -19,5 +19,5 @@ class Provider(models.Base):
     available_expires_at = fields.DateTimeField(required=True)
     created_at = fields.DateTimeField(required=True)
     predictions = fields.EmbeddedField(Metrics)
-    predictions_sent = fields.EmbeddedField(Metrics)
+    predictions_ent = fields.EmbeddedField(Metrics)
     stats = fields.EmbeddedField(Stats)
