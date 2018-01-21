@@ -2,6 +2,7 @@ from cement.core.controller import CementBaseController, expose
 from .login import AuthLoginController
 from .register import AuthRegisterController
 from utils.services.provider import ProviderService
+from utils.services.wallet import WalletService
 
 
 class AuthController(CementBaseController):
@@ -24,7 +25,8 @@ class AuthController(CementBaseController):
     self.app.args.print_help()
     
   
-  @expose(help="Generate a DOP wallet address")
+  @expose(help="Generate a DOP wallet")
   def generate_wallet(self):
-    print("New wallet generated: 0xC87238bF648C1aa1b64Ec83a0eCA4b8EB9E46F75")
-    
+    wallet = WalletService.generate()
+    self.app.log.info("Wallet Address: " + wallet.address)
+    self.app.log.info("Private Key: " + wallet.private_key)
