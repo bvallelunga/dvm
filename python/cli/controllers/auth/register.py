@@ -28,4 +28,6 @@ class AuthRegisterController(CementBaseController):
     )
     
     if not response: return
-    self.app.log.info("Account created, here your access token: " + response.wallet) 
+    self.app.store.set("access-token", response.wallet)
+    self.app.log.info("Account created, here is your access token: " + response.wallet)
+    self.app.log.info("Your access token has been saved here: " + self.app.store.filePath) 

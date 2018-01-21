@@ -35,4 +35,5 @@ class AuthController(CementBaseController):
       self.app.log.error("Wallet address is missing")
       return
       
-    print("Wallet logged in:", self.app.pargs.arguments[0])
+    self.app.store.set("access-token", self.app.pargs.arguments[0])
+    self.app.log.info("Wallet address stored!")
