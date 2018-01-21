@@ -18,9 +18,4 @@ class UserService:
 
       return None
       
-    return User(
-      name = response["user"]["name"],
-      email = response["user"]["email"],
-      wallet = response["user"]["wallet"],
-      created_at = response["user"]["created_at"]
-    )
+    return User.build(response["user"])
