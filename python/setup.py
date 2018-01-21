@@ -20,8 +20,7 @@ setup(
     "requests",
     "cement",
     "colorlog",
-    "jsonmodels",
-    "json"
+    "jsonmodels"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",
