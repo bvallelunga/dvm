@@ -1,26 +1,41 @@
-import requests, config
+from . import *
 from ..models.provider import *
 
 
-class ProviderService:
-  
-  @staticmethod
-  def register(app, endpoint):
-    if not app.store.get("access-token"):
-      app.log.error("Please login first! dvm auth login [wallet]")
-      return
-     
-    response = requests.post(config.host + "/v1/providers/create", json={
-      "endpoint": endpoint,
-      "type": "server"
-    }, headers={
-      "access-token": app.store.get("access-token")
-    }).json()
-    
-    if not response["success"]:
-      for error in response["errors"]:
-        app.log.error(error)
+class ProviderService(BaseService):
 
-      return None
-        
+  @classmethod
+  def register(cls, app, endpoint):
+    request = Request(
+      app = app,
+      method = "post",
+      endpoint = "/v1/providers/create",
+      authenticated = True,
+      data = {
+        "endpoint": endpoint,
+        "type": "server"
+      }
+    )
+    
+    response = cls.request(request)
+    if not response: return    
     return Provider.build(response["provider"])
+    
+    
+  
+  @classmethod
+  def availability(cls, app, provider, available):
+    request = Request(
+      app = app,
+      method = "post",
+      authenticated = True,
+      endpoint = "/v1/providers/" + provider.id + "/availability",
+      data = {
+        "available": available
+      }
+    )
+    
+    response = cls.request(request)
+    if not response: return    
+    return Provider.build(response["provider"])
+    

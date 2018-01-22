@@ -1,21 +1,22 @@
-import requests, config
+from . import *
 from ..models.user import User
 
-class UserService:
+class UserService(BaseService):
   
-  @staticmethod
-  def register(app, name, email, password, wallet):    
-    response = requests.post(config.host + "/v1/users/create", json={
-      "name": name,
-      "email": email,
-      "password": password,
-      "wallet": wallet
-    }).json()
+  @classmethod
+  def register(cls, app, name, email, password, wallet):    
+    request = Request(
+      app = app,
+      method = "post",
+      endpoint = "/v1/users/create",
+      data = {
+        "name": name,
+        "email": email,
+        "password": password,
+        "wallet": wallet
+      }
+    )
     
-    if not response["success"]:
-      for error in response["errors"]:
-        app.log.error(error)
-
-      return None
-      
+    response = cls.request(request)
+    if not response: return 
     return User.build(response["user"])

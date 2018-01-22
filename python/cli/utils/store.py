@@ -18,7 +18,10 @@ class Store:
 
   
   def get(self, key):
-    return self.datastore[key]
+    if key in self.datastore:
+      return self.datastore[key]
+      
+    return None
     
     
   def set(self, key, value):
