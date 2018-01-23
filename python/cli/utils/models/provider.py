@@ -1,26 +1,26 @@
 from jsonmodels import models, fields
 
 
-class Metrics(models.Base):
-  daily = fields.IntField()
-  weekly = fields.IntField()
-  monthly = fields.IntField()
+class ProviderMetrics(models.Base):
+  daily = fields.IntField(required=True)
+  weekly = fields.IntField(required=True)
+  monthly = fields.IntField(required=True)
   
   @staticmethod
   def build(json):
-    return Metrics(
+    return ProviderMetrics(
       daily = json["daily"],
       weekly = json["weekly"],
       monthly = json["monthly"]
     )
     
 
-class Stats(models.Base):
-  trust = fields.IntField()
+class ProviderStats(models.Base):
+  trust = fields.FloatField(required=True)
   
   @staticmethod
   def build(json):
-    return Stats(
+    return ProviderStats(
       trust = json["trust"]
     )
   
@@ -33,9 +33,9 @@ class Provider(models.Base):
   available_at = fields.DateTimeField(required=True)
   available_expires_at = fields.DateTimeField(required=True)
   created_at = fields.DateTimeField(required=True)
-  predictions = fields.EmbeddedField(Metrics, required=True)
-  predictions_ent = fields.EmbeddedField(Metrics, required=True)
-  stats = fields.EmbeddedField(Stats, required=True)
+  predictions = fields.EmbeddedField(ProviderMetrics, required=True)
+  predictions_ent = fields.EmbeddedField(ProviderMetrics, required=True)
+  stats = fields.EmbeddedField(ProviderStats, required=True)
   
   @staticmethod
   def build(json):
@@ -47,7 +47,7 @@ class Provider(models.Base):
       available_at = json["available_at"],
       available_expires_at = json["available_expires_at"],
       created_at = json["created_at"],
-      predictions = Metrics.build(json["predictions"]),
-      predictions_sent = Metrics.build(json["predictions_sent"]),
-      stats = Stats.build(json["stats"])
+      predictions = ProviderMetrics.build(json["predictions"]),
+      predictions_sent = ProviderMetrics.build(json["predictions_sent"]),
+      stats = ProviderStats.build(json["stats"])
     )

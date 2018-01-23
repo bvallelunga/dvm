@@ -10,8 +10,8 @@ class AuthLoginController(CementBaseController):
     usage = 'dvm auth login [arguments...]'
     description = 'Login by using a wallet address'
     arguments = [
-      (['--wallet'], dict(action='store', help="DOP Wallet Address", dest="wallet")),
-      (['--endpoint'], dict(action='store', help="Endpoint for Doppler Servers", dest="endpoint"))
+      (['--wallet', '-w'], dict(action='store', help="DOP Wallet Address", dest="wallet")),
+      (['--endpoint', '-e'], dict(action='store', help="Endpoint for Doppler Servers", dest="endpoint"))
     ]
    
   
@@ -22,6 +22,7 @@ class AuthLoginController(CementBaseController):
       return
     
     old_access_token = self.app.store.get("access-token")
+    old_provider = self.app.store.get("provider")
     self.app.store.set("access-token", self.app.pargs.wallet)
     
     provider = ProviderService.register(
@@ -31,6 +32,7 @@ class AuthLoginController(CementBaseController):
     
     if not provider: 
       self.app.store.set("access-token", old_access_token)
+      self.app.store.set("provider", old_provider)
       return
     
     self.app.store.set("provider", provider.id)

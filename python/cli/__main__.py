@@ -4,8 +4,9 @@ from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
 from utils.store import Store
 
-from controllers.base import BaseController
+from controllers import BaseController
 from controllers.auth import AuthController
+from controllers.provider import ProviderController
 
 
 class App(CementApp):
@@ -16,7 +17,8 @@ class App(CementApp):
     log_handler = 'colorlog'
     handlers = [
       BaseController,
-      AuthController
+      AuthController,
+      ProviderController
     ]
   
   store = Store()

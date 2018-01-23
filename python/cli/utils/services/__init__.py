@@ -26,13 +26,12 @@ class BaseService:
   endpoint = ""
   access_required = False
   
-  @staticmethod
-  def request(request):
+  @classmethod
+  def request(cls, request):
     # Check for authentication
     if request.authenticated:
       if not request.app.store.get("access-token"):
-        request.app.log.error("Please login first! dvm auth login [wallet]")
-        return None
+        return cls.login_error(request.app)
       
       else:
         request.headers["access-token"] = request.app.store.get("access-token")
@@ -55,4 +54,11 @@ class BaseService:
         
     # Return response
     return response
+    
+  
+  
+  @staticmethod
+  def login_error(app):
+    app.log.error("Please login first! dvm auth login [wallet]")
+    return None
     
