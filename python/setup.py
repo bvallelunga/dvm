@@ -21,7 +21,8 @@ setup(
     "cement",
     "colorlog",
     "jsonmodels",
-    "tabulate"
+    "tabulate",
+    'flask',
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",

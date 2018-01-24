@@ -1,4 +1,5 @@
 from cement.core.controller import CementBaseController, expose
+from server import Server
 import config
 
 class ProviderServerController(CementBaseController):
@@ -15,4 +16,5 @@ class ProviderServerController(CementBaseController):
   
   @expose(hide=True)
   def default(self): 
-    print(self.app.pargs.port)
+    server = Server()
+    server.run(host="0.0.0.0", port=int(self.app.pargs.port))
