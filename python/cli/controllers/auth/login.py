@@ -31,7 +31,6 @@ class AuthLoginController(CementBaseController):
     
     else:
       provider = ProviderService.register(
-        app = self.app,
         endpoint = self.app.pargs.endpoint 
       )
       

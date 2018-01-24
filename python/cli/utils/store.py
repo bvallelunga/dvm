@@ -34,3 +34,7 @@ class Store:
     with open(self.filePath, 'w') as f:
       json.dump(self.datastore, f)
       f.close()
+
+
+# Export Store
+store = Store()

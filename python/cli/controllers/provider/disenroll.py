@@ -9,7 +9,7 @@ class ProviderDisenrollController(CementBaseController):
     stacked_on = 'provider'
     stacked_type = 'nested'
     usage = 'dvm provider disenroll [arguments...]'
-    description = 'Disenroll provider in apps'
+    description = 'Disenroll provider in app'
     arguments = [
       (['--app', '-a'], dict(action='store', help="App ID to enroll in", dest="app")),
     ]
@@ -29,7 +29,6 @@ class ProviderDisenrollController(CementBaseController):
   
   def disenroll_app(self, app_id):    
     return ProviderService.enroll_app(
-      app = self.app,
       app_id = app_id,
       enroll = False
     )

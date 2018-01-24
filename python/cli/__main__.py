@@ -2,7 +2,7 @@
 
 from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
-from utils.store import Store
+from utils.store import store
 
 from controllers import BaseController
 from controllers.auth import AuthController
@@ -13,15 +13,16 @@ class App(CementApp):
   class Meta:
     label = 'app'
     base_controller = 'base'
-    extensions = ['colorlog']
+    extensions = ['colorlog', 'tabulate']
     log_handler = 'colorlog'
+    output_handler = 'tabulate'
     handlers = [
       BaseController,
       AuthController,
       ProviderController
     ]
-  
-  store = Store()
+    
+  store = store
 
     
 def main(args=None):

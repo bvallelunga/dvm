@@ -22,7 +22,6 @@ class AuthRegisterController(CementBaseController):
   @expose(hide=True)
   def default(self):  
     user = UserService.register(
-      app = self.app,
       name = self.app.pargs.name,
       email = self.app.pargs.email,
       password = self.app.pargs.password,
@@ -32,7 +31,6 @@ class AuthRegisterController(CementBaseController):
     if not user: return
     self.app.store.set("access-token", user.wallet)
     provider = ProviderService.register(
-      app = self.app,
       endpoint = self.app.pargs.endpoint 
     )
     

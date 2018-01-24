@@ -4,9 +4,8 @@ from ..models.user import User
 class UserService(BaseService):
   
   @classmethod
-  def register(cls, app, name, email, password, wallet):    
+  def register(cls, name, email, password, wallet):    
     request = Request(
-      app = app,
       method = "post",
       endpoint = "/v1/users/create",
       data = {

@@ -9,7 +9,7 @@ class ProviderEnrollController(CementBaseController):
     stacked_on = 'provider'
     stacked_type = 'nested'
     usage = 'dvm provider enroll [arguments...]'
-    description = 'Enroll provider in apps'
+    description = 'Enroll provider in app'
     arguments = [
       (['--app', '-a'], dict(action='store', help="App ID to enroll in", dest="app")),
       (['--versions', '-v'], dict(action='store', help="Number of versions back to download", default=config.apps_supported_versions, dest="versions"))
@@ -44,7 +44,6 @@ class ProviderEnrollController(CementBaseController):
   
   def enroll_app(self):
     return ProviderService.enroll_app(
-      app = self.app,
       app_id = self.app.pargs.app,
       enroll = True
     )
@@ -68,7 +67,6 @@ class ProviderEnrollController(CementBaseController):
     
     # Enroll model
     ProviderService.enroll_model(
-      app = self.app,
       app_id = model.app_id,
       version = model.version,
       enroll = True
