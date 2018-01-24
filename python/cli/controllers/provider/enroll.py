@@ -27,12 +27,13 @@ class ProviderEnrollController(CementBaseController):
     app_store = apps_store[app_id] if app_id in apps_store else {}
     
     # Enroll app
-    versions = int(self.app.pargs.versions)
-    models = self.enroll_app()[0:versions]
+    models = self.enroll_app()
+    if not models: return
     self.app.log.info("Enrolled in app {}".format(app_id))
     
     # Enroll models
-    for model in models:
+    versions = int(self.app.pargs.versions)
+    for model in models[0:versions]:
       self.enroll_model(model, app_store)
     
     # Finish
@@ -46,7 +47,7 @@ class ProviderEnrollController(CementBaseController):
       app = self.app,
       app_id = self.app.pargs.app,
       enroll = True
-    ) or []
+    )
     
     
   def enroll_model(self, model, app_store):

@@ -8,10 +8,11 @@ class AuthLoginController(CementBaseController):
     stacked_on = 'auth'
     stacked_type = 'nested'
     usage = 'dvm auth login [arguments...]'
-    description = 'Login by using a wallet address'
+    description = 'Login by using your wallet address. If a provider id is not given, an account will be created.'
     arguments = [
-      (['--wallet', '-w'], dict(action='store', help="DOP Wallet Address", dest="wallet")),
-      (['--endpoint', '-e'], dict(action='store', help="Endpoint for Doppler Servers", dest="endpoint"))
+      (['--wallet', '-w'], dict(action='store', help="REQUIRED: DOP Wallet Address", dest="wallet")),
+      (['--endpoint', '-e'], dict(action='store', help="OPTIONAL: Endpoint for Doppler to contact your server", dest="endpoint")),
+      (['--provider', '-p'], dict(action='store', help="OPTIONAL: Provider ID, must be owned by the wallet", dest="provider")),
     ]
    
   
@@ -25,16 +26,22 @@ class AuthLoginController(CementBaseController):
     old_provider = self.app.store.get("provider")
     self.app.store.set("access-token", self.app.pargs.wallet)
     
-    provider = ProviderService.register(
-      app = self.app,
-      endpoint = self.app.pargs.endpoint 
-    )
+    if self.app.pargs.provider:
+      self.app.store.set("provider", self.app.pargs.provider) 
     
-    if not provider: 
-      self.app.store.set("access-token", old_access_token)
-      self.app.store.set("provider", old_provider)
-      return
+    else:
+      provider = ProviderService.register(
+        app = self.app,
+        endpoint = self.app.pargs.endpoint 
+      )
+      
+      if not provider: 
+        self.app.store.set("access-token", old_access_token)
+        self.app.store.set("provider", old_provider)
+        return
+      
+      self.app.store.set("provider", provider.id)
     
-    self.app.store.set("provider", provider.id)
+    self.app.store.set("apps", {})
     self.app.log.info("Wallet address stored locally")
     self.app.log.info("Provider attached to your user account")
