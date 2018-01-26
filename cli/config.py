@@ -12,4 +12,5 @@ store_db="store.db"
 apps_supported_versions = 5
 
 # Provider server port
+provider_host = "0.0.0.0"
 provider_port = 3677
