@@ -1,11 +1,7 @@
-import requests, config, colorlog
+import requests, config
+from ..logger import logger
 from ..timer import ReturnTimer
 from ..store import store
-
-handler = colorlog.StreamHandler()
-handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)s: %(message)s'))
-logger = colorlog.getLogger('services')
-logger.addHandler(handler)
 
 
 class Request:
@@ -36,21 +32,7 @@ class BaseService:
       request.headers["access-token"] = token
      
     # Make requests
-    endpoint = config.host + request.endpoint
-    
-    try:
-      if request.method == "post":
-        response = requests.post(endpoint, json=request.data, headers=request.headers).json()
-        
-      elif request.method == "get":
-        response = requests.get(endpoint, params=request.data, headers=request.headers).json()    
-          
-    except:
-      def retry_request():
-        return cls.request(request)
-    
-      logger.error("Lost connection to Doppler, trying to reestablish...")
-      return ReturnTimer(config.provider_availability_backoff, retry_request).start()
+    response = cls._request(request)
       
     
     # Check for errors
@@ -64,10 +46,30 @@ class BaseService:
     return response
     
   
+  @classmethod  
+  def _request(cls, request, init_request=True):
+    endpoint = config.host + request.endpoint
+    
+    try:
+      if request.method == "post":
+        return requests.post(endpoint, json=request.data, headers=request.headers).json()
+        
+      elif request.method == "get":
+        return requests.get(endpoint, params=request.data, headers=request.headers).json()    
+          
+    except:
+      def retry_request():
+        return cls._request(request, init_request=False)
+        
+      if init_request: logger.error("Lost connection to Doppler, trying to reestablish...")
+      response = ReturnTimer(config.provider_availability_backoff, retry_request).start()
+      if init_request: logger.info("Restored connection to Doppler")
+      return response
+  
   
   @staticmethod
   def login_error():
-    logger.error("Please login first! dvm auth login [wallet]")
+    logger.error("Please login first!\n$dvm auth login [wallet]")
     return None
     
     

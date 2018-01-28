@@ -1,3 +1,7 @@
+# Code from StackOverflow
+# https://stackoverflow.com/questions/28635985/extending-threading-timer-for-returning-value-from-function-gives-typeerror
+
+
 from threading import Timer as Timer
 
 class ReturnTimer(Timer):
