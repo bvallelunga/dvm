@@ -17,7 +17,7 @@ class ProviderServerController(CementBaseController):
     arguments = [ 
       (['--host'], dict(action='store', help="Should be accessible to the public.", default=config.provider_host, dest="host")),
       (['--port'], dict(action='store', help="Should match the endpoint's port from registration.", default=config.provider_port, dest="port")),
-      (['--flask-debug'], dict(action='store_true', help="", default=config.provider_port, dest="flask_debug"))
+      (['--flask-debug'], dict(action='store_true', help="", dest="flask_debug"))
     ]
    
   

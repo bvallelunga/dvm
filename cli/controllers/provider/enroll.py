@@ -28,11 +28,15 @@ class ProviderEnrollController(CementBaseController):
     
     # Enroll app
     models = self.enroll_app()
-    if not models: return
+    
+    if not models or len(models) == 0:
+      return self.app.log.warning("App does not have any models to download")
+    
     self.app.log.info("Enrolled in app {}".format(app_id))
     
     # Enroll models
     versions = int(self.app.pargs.versions)
+    
     for model in models[0:versions]:
       self.enroll_model(model, app_store)
     
