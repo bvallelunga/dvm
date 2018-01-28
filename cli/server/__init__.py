@@ -7,7 +7,7 @@ server = Flask(__name__)
 
 
 # Routes
-@server.route('/apps/<app>/models/<model>/prediction', methods=['POST'])
-def hello_world(app, model):
+@server.route('/prediction', methods=['POST'])
+def hello_world():
   print(request.headers.get('access-token'), store.get("access-token"), request.data)
   return ''

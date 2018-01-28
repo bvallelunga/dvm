@@ -1,4 +1,5 @@
 import requests, config, colorlog
+from ..timer import ReturnTimer
 from ..store import store
 
 handler = colorlog.StreamHandler()
@@ -37,11 +38,20 @@ class BaseService:
     # Make requests
     endpoint = config.host + request.endpoint
     
-    if request.method == "post":
-      response = requests.post(endpoint, json=request.data, headers=request.headers).json()
+    try:
+      if request.method == "post":
+        response = requests.post(endpoint, json=request.data, headers=request.headers).json()
+        
+      elif request.method == "get":
+        response = requests.get(endpoint, params=request.data, headers=request.headers).json()    
+          
+    except:
+      def retry_request():
+        return cls.request(request)
+    
+      logger.error("Lost connection to Doppler, trying to reestablish...")
+      return ReturnTimer(config.provider_availability_backoff, retry_request).start()
       
-    elif request.method == "get":
-      response = requests.get(endpoint, params=request.data, headers=request.headers).json()
     
     # Check for errors
     if not response["success"]:
