@@ -5,7 +5,8 @@ host="http://api.localhost:3030"
 
 # Local datastore
 local_directory=os.path.expanduser("~/.dvm/")
-store_db="store.db"
+store_db=os.path.join(local_directory, "store.db")
+queue_db=os.path.join(local_directory, "queue.db")
 
 # How many of the latests model
 # versions to support per app

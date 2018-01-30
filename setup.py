@@ -22,7 +22,8 @@ setup(
     "colorlog",
     "jsonmodels",
     "tabulate",
-    'flask',
+    "flask",
+    "persist-queue"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",

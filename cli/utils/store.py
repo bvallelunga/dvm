@@ -4,13 +4,12 @@ import config
 class Store:
   
   datastore = {}
-  filePath = os.path.join(config.local_directory, config.store_db)
   
   def __init__(self):
     os.makedirs(config.local_directory, exist_ok=True)
 
-    if os.path.exists(self.filePath):
-      with open(self.filePath, 'r') as f:
+    if os.path.exists(config.store_db):
+      with open(config.store_db, 'r') as f:
         self.datastore = json.load(f)
         f.close()
     
@@ -31,7 +30,7 @@ class Store:
     
   
   def _update(self):
-    with open(self.filePath, 'w') as f:
+    with open(config.store_db, 'w') as f:
       json.dump(self.datastore, f)
       f.close()
 
