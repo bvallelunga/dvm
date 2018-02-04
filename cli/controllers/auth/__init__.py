@@ -9,7 +9,6 @@ class AuthController(CementBaseController):
   class Meta:
     label = 'auth'
     stacked_on = 'base'
-    stacked_type = 'nested'
     usage = 'dvm auth [command] [arguments...]'
     description = "User authentication and management"
 
@@ -18,11 +17,6 @@ class AuthController(CementBaseController):
     super(AuthController, self)._setup(app)
     app.handler.register(AuthRegisterController)
     app.handler.register(AuthLoginController)
-
-
-  @expose(hide=True)
-  def default(self):
-    self.app.args.print_help()
     
   
   @expose(help="Generate a DOP wallet")
