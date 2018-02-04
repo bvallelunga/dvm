@@ -1,6 +1,6 @@
 from cement.core.controller import CementBaseController, expose
 from utils.services.provider import ProviderService
-import config, requests, os
+import config, requests, os, zipfile
 
 
 class ProviderEnrollController(CementBaseController):
@@ -18,6 +18,7 @@ class ProviderEnrollController(CementBaseController):
   
   @expose(hide=True)
   def default(self): 
+    os.makedirs(config.app_store, exist_ok=True)
     app_id = self.app.pargs.app
        
     if not app_id:
@@ -54,20 +55,33 @@ class ProviderEnrollController(CementBaseController):
     
     
   def enroll_model(self, model, app_store):
-    # Download tensorflow model
+    # Download app
     response = requests.get(config.host + model.urls.tensorflow, stream=True, allow_redirects=True, headers={
       "access-token": self.app.store.get("access-token")
     })
     response.raise_for_status()
-    fileName = "{}_{}_tensorflow.pb".format(model.app_id, model.version)
-    filePath = os.path.join(config.local_directory, fileName)
     
-    with open(filePath, 'wb') as f:
+    appFolder = os.path.join(config.app_store, str(model.app_id))
+    os.makedirs(appFolder, exist_ok=True)
+    
+    zipfileName = "{}.zip".format(model.version)
+    zipfilePath = os.path.join(appFolder, zipfileName)
+    
+    with open(zipfilePath, 'wb') as f:
       for block in response.iter_content(1024):
         f.write(block) 
       f.close()
       
-    app_store[model.version] = fileName
+    # Unzip app
+    folderPath = os.path.join(appFolder, str(model.version))
+    os.makedirs(folderPath, exist_ok=True)
+    
+    zip_ref = zipfile.ZipFile(zipfilePath, 'r')
+    zip_ref.extractall(folderPath)
+    zip_ref.close()  
+    os.remove(zipfilePath)
+    
+    app_store[model.version] = folderPath
     
     # Enroll model
     ProviderService.enroll_model(

@@ -6,6 +6,7 @@ host="http://api.localhost:3030"
 # Local datastore
 local_directory=os.path.expanduser("~/.dvm/")
 store_db=os.path.join(local_directory, "store.db")
+app_store=os.path.join(local_directory, "apps")
 queue_db=os.path.join(local_directory, "queue.db")
 
 # How many of the latests model

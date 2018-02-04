@@ -1,6 +1,6 @@
 from cement.core.controller import CementBaseController, expose
 from utils.services.provider import ProviderService
-import config, requests, os
+import config, requests, os, shutil
 
 
 class ProviderDisenrollController(CementBaseController):
@@ -36,10 +36,9 @@ class ProviderDisenrollController(CementBaseController):
     
   def delete_models(self, app_id):
     apps_store = self.app.store.get("apps", {})
+    appFolder = os.path.join(config.app_store, app_id)
+    shutil.rmtree(appFolder, ignore_errors=True)
     
-    if app_id in apps_store:   
-      for key, value in apps_store[app_id].items():
-        os.remove(os.path.join(config.local_directory, value))
-      
+    if app_id in apps_store:         
       del apps_store[app_id]
       self.app.store.set("apps", apps_store)

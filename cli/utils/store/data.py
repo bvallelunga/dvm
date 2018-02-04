@@ -1,7 +1,7 @@
 import json, os.path
 import config
 
-class Store:
+class DataStore:
   
   datastore = {}
   
@@ -33,7 +33,3 @@ class Store:
     with open(config.store_db, 'w') as f:
       json.dump(self.datastore, f)
       f.close()
-
-
-# Export Store
-store = Store()
