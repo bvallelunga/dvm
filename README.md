@@ -9,8 +9,29 @@ Doppler Virtual Machine CLI
 
 commands:
 
+  apps
+    Your enrolled apps
+
+  disenroll
+    Disenroll provider in app
+
+  enroll
+    Enroll provider in app
+
+  generate-wallet
+    Generate a DOP wallet
+
+  login
+    Login by using your wallet address. If a provider id is not given, an account will be created.
+
+  register
+    Create new user account linked to your wallet address.
+
+  server
+    Start provider server
+
   wallet
-    Create or load a wallet address
+    Your wallet address
 
 optional arguments:
   -h, --help     show this help message and exit
