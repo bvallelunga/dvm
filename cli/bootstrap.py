@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
 from cement.core.exc import CaughtSignal
