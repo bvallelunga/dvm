@@ -1,34 +1,34 @@
 from jsonmodels import models, fields
 
 
-class PredictionCallback(models.Base):
+class TaskCallback(models.Base):
   method = fields.StringField(required=True)
   url = fields.StringField(required=True)
   
   @staticmethod
   def build(json):
-    return PredictionCallback(
+    return TaskCallback(
       method = json["method"],
       url = json["url"]
     )
   
 
-class Prediction(models.Base):
+class Task(models.Base):
   task_id = fields.IntField()
   provider_id = fields.IntField()
   app_id = fields.IntField()
   model_id = fields.IntField()
   input = None
-  callback = fields.EmbeddedField(PredictionCallback, required=True)
+  callback = fields.EmbeddedField(TaskCallback, required=True)
   
   @staticmethod
   def build(json):
-    prediction = Prediction(
+    prediction = Task(
       task_id = json["task_id"],
       provider_id = json["provider_id"],
       app_id = json["app_id"],
       model_id = json["model_id"],
-      callback = PredictionCallback.build(json["callback"]),
+      callback = TaskCallback.build(json["callback"]),
     )
     
     prediction.input = json["input"]

@@ -30,3 +30,14 @@ class AuthController(CementBaseController):
     wallet = WalletService.generate()
     self.app.log.info("Wallet Address: " + wallet.address)
     self.app.log.info("Private Key: " + wallet.private_key)
+    
+    
+  @expose(help="Your wallet address")
+  def wallet(self):
+    token = self.app.store.get("access-token")
+    
+    if token:
+      self.app.log.info("Wallet Address: " + token)
+    else:
+      ProviderService.login_error()
+    

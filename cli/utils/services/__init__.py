@@ -9,15 +9,17 @@ class Request:
   method = None
   endpoint = None
   authenticated = False
+  partial_url = True
   data={}
   headers={}
   
-  def __init__(self, method, endpoint, authenticated=False, data={}, headers={}):
+  def __init__(self, method, endpoint, authenticated=False, data={}, headers={}, partial_url=True):
     self.method = method
     self.endpoint = endpoint
     self.authenticated = authenticated
     self.data = data
     self.headers = headers
+    self.partial_url = partial_url
 
 
 
@@ -48,7 +50,10 @@ class BaseService:
   
   @classmethod  
   def _request(cls, request, init_request=True):
-    endpoint = config.host + request.endpoint
+    endpoint = request.endpoint
+    
+    if request.partial_url:
+      endpoint = config.host + endpoint
     
     try:
       if request.method == "post":
