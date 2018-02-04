@@ -8,7 +8,7 @@ class ProviderEnrollController(CementBaseController):
     label = 'enroll'
     stacked_on = 'provider'
     stacked_type = 'nested'
-    usage = 'dvm provider enroll [arguments...]'
+    usage = 'dvm enroll [arguments...]'
     description = 'Enroll provider in app'
     arguments = [
       (['--app', '-a'], dict(action='store', help="App ID to enroll in", dest="app")),

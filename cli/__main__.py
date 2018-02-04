@@ -43,6 +43,5 @@ def main(args=None):
     app.close()
 
 
-   
 if __name__ == "__main__":
   main()

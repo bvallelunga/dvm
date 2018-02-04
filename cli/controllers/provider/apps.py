@@ -6,7 +6,7 @@ class ProviderAppsController(CementBaseController):
     label = 'apps'
     stacked_on = 'provider'
     stacked_type = 'nested'
-    usage = 'dvm provider apps'
+    usage = 'dvm apps'
     description = 'Your enrolled apps'
    
   

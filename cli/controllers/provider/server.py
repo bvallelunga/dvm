@@ -12,7 +12,7 @@ class ProviderServerController(CementBaseController):
     label = 'server'
     stacked_on = 'provider'
     stacked_type = 'nested'
-    usage = 'dvm provider server [arguments...]'
+    usage = 'dvm server [arguments...]'
     description = 'Start provider server'
     arguments = [ 
       (['--host'], dict(action='store', help="Should be accessible to the public.", default=config.provider_host, dest="host")),
