@@ -32,9 +32,8 @@ def main(args=None):
     app = App()
     app.setup()
     app.run()
-  except Exception as e:
-    traceback.print_exc()
-    
+  
+  except CaughtSignal as e:
     for thread in threading.enumerate():
       className = thread.__class__.__name__
 
