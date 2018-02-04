@@ -13,6 +13,10 @@ class ModelInterface():
     "feature_1",
     "feature_2"
   ]
+  output_mapper = [
+    "output_1",
+    "output_2"
+  ]
   
   def __init__(self):  
     with tf.Session() as session:    
@@ -37,14 +41,21 @@ class ModelInterface():
     
   
   def prediction(self, input):
-    # Map Dictionary to Tensor
+    # Map Input
     input_tensor = []
     for feature in self.input_mapper:
       input_tensor.append(input[feature])
       
     # Fetch Inference
-    results = self.session.run(self.inference_tensor, feed_dict={
+    inference = self.session.run(self.inference_tensor, feed_dict={
       self.input_tensor: [input_tensor]
-    })
-    return results[0]
+    })[0]
+    
+    # Map Output
+    output = {}
+    for i, feature in enumerate(inference):
+      feature_name = self.output_mapper[i]
+      output[feature_name] = feature
+      
+    return output
 
