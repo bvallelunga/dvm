@@ -1,2 +1,0 @@
-npm prune;
-npm shrinkwrap;
