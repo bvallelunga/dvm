@@ -7,7 +7,7 @@ class AuthLoginController(CementBaseController):
     label = 'login'
     stacked_on = 'auth'
     stacked_type = 'nested'
-    usage = 'dvm auth login [arguments...]'
+    usage = 'dvm login [arguments...]'
     description = 'Login by using your wallet address. If a provider id is not given, an account will be created.'
     arguments = [
       (['--wallet', '-w'], dict(action='store', help="REQUIRED: DOP Wallet Address", dest="wallet")),

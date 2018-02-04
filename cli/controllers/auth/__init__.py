@@ -9,8 +9,6 @@ class AuthController(CementBaseController):
   class Meta:
     label = 'auth'
     stacked_on = 'base'
-    usage = 'dvm auth [command] [arguments...]'
-    description = "User authentication and management"
 
   
   def _setup(self, app):

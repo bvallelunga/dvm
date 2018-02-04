@@ -8,7 +8,7 @@ class AuthRegisterController(CementBaseController):
     label = 'register'
     stacked_on = 'auth'
     stacked_type = 'nested'
-    usage = 'dvm auth register [arguments...]'
+    usage = 'dvm register [arguments...]'
     description = 'Create new user account linked to your wallet address.'
     arguments = [
       (['--name', '-n'], dict(action='store', help="REQUIRED: Full Name", dest="name")),
