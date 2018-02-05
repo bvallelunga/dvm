@@ -1,5 +1,5 @@
 from cement.core.controller import CementBaseController, expose
-from utils.services.app import AppService
+from cli.utils.services.app import AppService
 
 class ProviderAppsController(CementBaseController):
   class Meta:

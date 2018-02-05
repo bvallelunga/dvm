@@ -1,6 +1,7 @@
 from cement.core.controller import CementBaseController, expose
-from utils.services.provider import ProviderService
-import config, requests, os, shutil
+from cli.utils.services.provider import ProviderService
+import cli.config as config
+import requests, os, shutil
 
 
 class ProviderDisenrollController(CementBaseController):

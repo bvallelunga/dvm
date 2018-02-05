@@ -1,6 +1,7 @@
 from cement.core.controller import CementBaseController, expose
-from utils.services.provider import ProviderService
-import config, requests, os, zipfile
+from cli.utils.services.provider import ProviderService
+import cli.config as config
+import requests, os, zipfile
 
 
 class ProviderEnrollController(CementBaseController):
@@ -29,8 +30,9 @@ class ProviderEnrollController(CementBaseController):
     
     # Enroll app
     models = self.enroll_app()
+    if not models: return
     
-    if not models or len(models) == 0:
+    if len(models) == 0:
       return self.app.log.warning("App does not have any models to download")
     
     self.app.log.info("Enrolled in app {}".format(app_id))

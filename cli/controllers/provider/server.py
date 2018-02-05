@@ -1,10 +1,10 @@
 from cement.core.controller import CementBaseController, expose
-from utils.services.provider import ProviderService
+from cli.utils.services.provider import ProviderService
 from datetime import datetime, timezone
 from threading import Timer
-from server import server
+import cli.server as server
+import cli.config as config
 import sys
-import config
 
 
 class ProviderServerController(CementBaseController):

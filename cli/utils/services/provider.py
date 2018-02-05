@@ -1,6 +1,6 @@
-from . import *
-from ..models.provider import Provider
-from ..models.model import Model
+from cli.utils.services import *
+from cli.utils.models.provider import Provider
+from cli.utils.models.model import Model
 
 
 class ProviderService(BaseService):

@@ -1,7 +1,8 @@
-import requests, config
-from ..logger import logger
-from ..timer import ReturnTimer
-from ..store import store
+import requests
+import cli.config as config
+from cli.utils.logger import logger
+from cli.utils.timer import ReturnTimer
+from cli.utils.store import store
 
 
 class Request:

@@ -1,5 +1,5 @@
-from . import *
-from ..models.app import App
+from cli.utils.services import *
+from cli.utils.models.app import App
 
 class AppService(BaseService):
   

@@ -1,16 +1,14 @@
 from flask import Flask, request
-from utils.models.task import Task
-from utils.store import store
+from cli.utils.models.task import Task
+from cli.utils.store import store
 from persistqueue import FIFOSQLiteQueue
-from server.worker import Worker
-import config, json
+from cli.server.worker import Worker
+import cli.config as config
+import json
 
-
-queue = FIFOSQLiteQueue(path=config.queue_db, multithreading=True)
 server = Flask(__name__)
-apps = store.get("apps", {})
-Worker(queue, store).start()
-
+apps = None
+queue = None
 
 @server.route('/prediction', methods=['POST'])
 def revieve_prediction():
@@ -38,3 +36,13 @@ def error_handler(error):
     }), 
     403
   )
+  
+  
+def run(host, port, debug):
+  global apps
+  global queue
+  
+  apps = store.get("apps", {})
+  queue = FIFOSQLiteQueue(path=config.queue_db, multithreading=True)
+  Worker(queue, store).start()
+  server.run(host=host, port=port, debug=debug)

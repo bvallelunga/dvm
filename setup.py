@@ -15,7 +15,7 @@ setup(
   long_description=read('README.md'),
   keywords = "doppler machine learning dvm",
   url = "http://packages.python.org/doppler-dvm",
-  packages=find_packages(exclude=['docs', 'tests']),
+  packages=[],
   install_requires=[
     "requests",
     "cement",
@@ -32,7 +32,7 @@ setup(
   ],
   entry_points={
     'console_scripts': [
-      'dvm = cli.bootstrap:main'
+      'dvm = cli.__main__:main'
     ]
   },
 )

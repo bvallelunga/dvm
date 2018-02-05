@@ -1,5 +1,5 @@
-from utils.models.task import Task
-from utils.services.task import TaskService
+from cli.utils.models.task import Task
+from cli.utils.services.task import TaskService
 from threading import Thread
 import json, importlib.util, requests
 
