@@ -46,11 +46,17 @@ optional arguments:
 1. Install dependencies
 
 ``` bash
-python3 setup.py install
+$ python3 setup.py install
 ```
 
-2. Run CLI locally
+2. Set API Endpoint [OPTIONAL]
 
 ``` bash
-python3 cli
+$ DVM_HOST="http://api.localhost:3030"
+```
+
+3. Run CLI locally
+
+``` bash
+$ python3 cli
 ```
