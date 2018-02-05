@@ -32,7 +32,7 @@ setup(
   ],
   entry_points={
     'console_scripts': [
-      'dvm = cli.bootstrap:main'
+      'dvm = cli.__main__:main'
     ]
   },
 )
