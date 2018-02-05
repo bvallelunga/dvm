@@ -20,6 +20,7 @@ class AuthLoginController(CementBaseController):
   def default(self):    
     if not self.app.pargs.wallet:
       self.app.log.error("Wallet address is missing")
+      self.app.args.print_help()
       return
     
     old_access_token = self.app.store.get("access-token")
@@ -37,6 +38,7 @@ class AuthLoginController(CementBaseController):
       if not provider: 
         self.app.store.set("access-token", old_access_token)
         self.app.store.set("provider", old_provider)
+        self.app.args.print_help()
         return
       
       self.app.store.set("provider", provider.id)
