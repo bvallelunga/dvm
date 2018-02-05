@@ -23,7 +23,8 @@ setup(
     "jsonmodels",
     "tabulate",
     "flask",
-    "persist-queue"
+    "persist-queue",
+    "tensorflow"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",
