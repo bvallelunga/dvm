@@ -1,5 +1,5 @@
 import json, os.path
-import config
+import cli.config as config
 
 class Store:
   

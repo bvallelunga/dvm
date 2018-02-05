@@ -1,4 +1,4 @@
-from ..models.wallet import Wallet
+from cli.utils.models.wallet import Wallet
 
 
 class WalletService:

@@ -1,6 +1,6 @@
 from cement.core.controller import CementBaseController, expose
-from utils.services.user import UserService
-from utils.services.provider import ProviderService
+from cli.utils.services.user import UserService
+from cli.utils.services.provider import ProviderService
 
 
 class AuthRegisterController(CementBaseController):

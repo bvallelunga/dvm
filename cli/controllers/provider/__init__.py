@@ -1,8 +1,8 @@
 from cement.core.controller import CementBaseController, expose
-from .enroll import ProviderEnrollController
-from .disenroll import ProviderDisenrollController
-from .server import ProviderServerController
-from .apps import ProviderAppsController
+from cli.controllers.provider.enroll import ProviderEnrollController
+from cli.controllers.provider.disenroll import ProviderDisenrollController
+from cli.controllers.provider.server import ProviderServerController
+from cli.controllers.provider.apps import ProviderAppsController
 
 
 class ProviderController(CementBaseController):

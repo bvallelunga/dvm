@@ -1,8 +1,8 @@
 from cement.core.controller import CementBaseController, expose
-from .login import AuthLoginController
-from .register import AuthRegisterController
-from utils.services.provider import ProviderService
-from utils.services.wallet import WalletService
+from cli.controllers.auth.login import AuthLoginController
+from cli.controllers.auth.register import AuthRegisterController
+from cli.utils.services.provider import ProviderService
+from cli.utils.services.wallet import WalletService
 
 
 class AuthController(CementBaseController):

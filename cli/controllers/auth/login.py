@@ -1,5 +1,5 @@
 from cement.core.controller import CementBaseController, expose
-from utils.services.provider import ProviderService
+from cli.utils.services.provider import ProviderService
 
 
 class AuthLoginController(CementBaseController):

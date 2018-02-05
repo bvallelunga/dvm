@@ -1,9 +1,10 @@
 from flask import Flask, request
-from utils.models.task import Task
-from utils.store import store
+from cli.utils.models.task import Task
+from cli.utils.store import store
 from persistqueue import FIFOSQLiteQueue
-from server.worker import Worker
-import config, json
+from cli.server.worker import Worker
+import cli.config as config
+import json
 
 server = Flask(__name__)
 apps = None

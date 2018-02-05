@@ -1,4 +1,4 @@
-from . import *
+from cli.utils.services import *
 
 class TaskService(BaseService):
   

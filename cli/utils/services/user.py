@@ -1,5 +1,5 @@
-from . import *
-from ..models.user import User
+from cli.utils.services import *
+from cli.utils.models.user import User
 
 class UserService(BaseService):
   

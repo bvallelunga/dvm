@@ -1,13 +1,12 @@
-from __future__ import absolute_import
 from cement.core.foundation import CementApp
 from cement.core.controller import CementBaseController, expose
 from cement.core.exc import CaughtSignal
 import threading, traceback
 
-from utils.store import store
-from controllers import BaseController
-from controllers.auth import AuthController
-from controllers.provider import ProviderController
+from cli.utils.store import store
+from cli.controllers import BaseController
+from cli.controllers.auth import AuthController
+from cli.controllers.provider import ProviderController
 
 
 class App(CementApp):
