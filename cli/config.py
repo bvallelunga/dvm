@@ -1,13 +1,14 @@
 import os
 
 # API host 
-host="http://api.localhost:3030"
+host = os.getenv('DVM_HOST', "https://api.doppler.market")
+
 
 # Local datastore
-local_directory=os.path.expanduser("~/.dvm/")
-store_db=os.path.join(local_directory, "store.db")
-app_store=os.path.join(local_directory, "apps")
-queue_db=os.path.join(local_directory, "queue.db")
+local_directory = os.path.expanduser("~/.dvm/")
+store_db = os.path.join(local_directory, "store.db")
+app_store = os.path.join(local_directory, "apps")
+queue_db = os.path.join(local_directory, "queue.db")
 
 # How many of the latests model
 # versions to support per app
