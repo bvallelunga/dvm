@@ -22,7 +22,9 @@ class AuthRegisterController(CementBaseController):
   @expose(hide=True)
   def default(self):
     if not self.app.pargs.endpoint:
-      return self.app.log.error("Field 'endpoint' is required")
+      self.app.log.error("Field 'endpoint' is required")
+      self.app.args.print_help()
+      return
     
     user = UserService.register(
       name = self.app.pargs.name,
@@ -31,13 +33,13 @@ class AuthRegisterController(CementBaseController):
       wallet = self.app.pargs.wallet
     )
     
-    if not user: return
+    if not user: return self.app.args.print_help()
     self.app.store.set("access-token", user.wallet)
     provider = ProviderService.register(
       endpoint = self.app.pargs.endpoint
     )
     
-    if not provider: return
+    if not provider: return self.app.args.print_help()
     self.app.store.set("provider", provider.id)
     self.app.store.set("apps", {})
     self.app.log.info("Account created, here is your access token: " + user.wallet)
