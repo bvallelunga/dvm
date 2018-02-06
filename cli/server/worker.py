@@ -54,7 +54,7 @@ class Worker():
         output = interface.prediction(task.input)
       )
     
-    else:
+    except Exception as e:
       traceback.format_exc()
       
     self.queue.task_done()

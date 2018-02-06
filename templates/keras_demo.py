@@ -1,3 +1,4 @@
+import base64, io
 import numpy as np
 from PIL import Image
 from keras.applications.vgg16 import VGG16
@@ -12,9 +13,10 @@ class ModelInterface():
     self.model = VGG16(weights='imagenet')
 
 
-  ### Input: [+224, +224, 3]
+  ### Input: Base64 image string
   def prediction(self, input):
-    img = Image.fromarray(input["image"])
+    decodedImage = base64.b64decode(input["image"])
+    img = Image.open(io.BytesIO(decodedImage))
     img = img.resize((224, 224))
     x = keras_image.img_to_array(img)[:, :, :3]
     x = np.expand_dims(x, axis=0)
@@ -30,10 +32,8 @@ class ModelInterface():
   
   
   def test_image(self):
-    img = Image.open("cat.jpg")
-    img.load()
-    img.thumbnail((512, 512), Image.ANTIALIAS)
-    return np.array(img)
+    with open("cat.jpg", "rb") as imageFile:
+      return base64.b64encode(imageFile.read())
 
  
 if __name__ == "__main__":   

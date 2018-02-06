@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from cli.utils.services import *
 from cli.utils.models.provider import Provider
 from cli.utils.models.model import Model
+from cli.utils.logger import logger
 
 
 class ProviderService(BaseService):
@@ -59,7 +60,9 @@ class ProviderService(BaseService):
     response = cls.request(request)
     if not response: return
     if not enroll: return True
-    return list(map(lambda m: Model.build(m), response["models"]))
+    models = list(map(lambda m: Model.build(m), response["models"]))
+    models.sort(key=lambda x: x.version, reverse=True)
+    return models
     
     
   @classmethod
