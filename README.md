@@ -52,7 +52,7 @@ $ python3 setup.py install
 2. Set API Endpoint [OPTIONAL]
 
 ``` bash
-$ DVM_HOST="http://api.localhost:3030"
+$ export DVM_HOST="http://api.localhost:3030"
 ```
 
 3. Run CLI locally
