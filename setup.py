@@ -15,7 +15,7 @@ setup(
   long_description=read('README.md'),
   keywords = "doppler machine learning dvm",
   url = "http://packages.python.org/doppler-dvm",
-  packages=[],
+  packages=["cli"],
   install_requires=[
     "requests",
     "cement",
