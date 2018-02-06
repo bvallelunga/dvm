@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.utils.services.user import UserService
 from cli.utils.services.provider import ProviderService

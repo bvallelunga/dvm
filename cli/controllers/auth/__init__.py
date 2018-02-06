@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.controllers.auth.login import AuthLoginController
 from cli.controllers.auth.register import AuthRegisterController

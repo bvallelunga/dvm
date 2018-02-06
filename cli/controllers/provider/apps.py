@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.utils.services.app import AppService
 

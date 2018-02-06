@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 from setuptools import setup, find_packages
 
@@ -15,7 +17,7 @@ setup(
   long_description=read('README.md'),
   keywords = "doppler machine learning dvm",
   url = "http://packages.python.org/doppler-dvm",
-  packages=[],
+  packages=find_packages(exclude=["tests", "templates", "experiments"]),
   install_requires=[
     "requests",
     "cement",
@@ -26,9 +28,9 @@ setup(
     "persist-queue",
     "tensorflow",
     "keras",
-    "scikit-learn>=0.19.0",
-    "pandas>=0.20.3",
-    "numpy>=1.7.1",
+    "scikit-learn",
+    "pandas",
+    "numpy",
     "h5py"
   ],
   classifiers=[

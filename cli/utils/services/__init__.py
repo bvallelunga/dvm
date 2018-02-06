@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import requests
 import cli.config as config
 from cli.utils.logger import logger
