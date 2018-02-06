@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import json, os.path
 import cli.config as config
 

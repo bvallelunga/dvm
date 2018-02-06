@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cli.utils.services import *
 from cli.utils.models.provider import Provider
 from cli.utils.models.model import Model

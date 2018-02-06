@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.controllers.provider.enroll import ProviderEnrollController
 from cli.controllers.provider.disenroll import ProviderDisenrollController

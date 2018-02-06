@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from flask import Flask, request
 from cli.utils.models.task import Task
 from cli.utils.store import store

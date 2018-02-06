@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from cli.utils.models.task import Task
 from cli.utils.services.task import TaskService
 from threading import Thread
