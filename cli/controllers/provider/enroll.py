@@ -30,7 +30,7 @@ class ProviderEnrollController(CementBaseController):
     
     # Enroll app
     models = self.enroll_app()
-    if not models: return
+    if models is None: return
     
     if len(models) == 0:
       return self.app.log.warning("App does not have any models to download")

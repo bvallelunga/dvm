@@ -24,7 +24,12 @@ setup(
     "tabulate",
     "flask",
     "persist-queue",
-    "tensorflow"
+    "tensorflow",
+    "keras",
+    "scikit-learn>=0.19.0",
+    "pandas>=0.20.3",
+    "numpy>=1.7.1",
+    "h5py"
   ],
   classifiers=[
     "Development Status :: 2 - Pre-Alpha",

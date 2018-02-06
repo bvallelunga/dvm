@@ -14,7 +14,7 @@ class ModelInterface():
 
   ### Input: [+224, +224, 3]
   def prediction(self, input):
-    img = Image.fromarray(input)
+    img = Image.fromarray(input["image"])
     img = img.resize((224, 224))
     x = keras_image.img_to_array(img)[:, :, :3]
     x = np.expand_dims(x, axis=0)
@@ -38,5 +38,6 @@ class ModelInterface():
  
 if __name__ == "__main__":   
   interface = ModelInterface()
-  image = interface.test_image()
-  print(interface.prediction(image))
+  print(interface.prediction({
+    "image": interface.test_image()
+  }))
