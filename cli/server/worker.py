@@ -55,6 +55,6 @@ class Worker():
       )
     
     except Exception as e:
-      traceback.format_exc()
+      traceback.print_exc()
       
     self.queue.task_done()
