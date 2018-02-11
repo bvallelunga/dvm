@@ -25,7 +25,7 @@ try:
         })
     )
 
-    print(json.dumps(response.json()["output"], indent=2))
+    print(json.dumps(response.json(), indent=2))
 except requests.exceptions.RequestException:
     print('HTTP Request failed')
 
