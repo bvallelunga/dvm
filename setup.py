@@ -32,7 +32,8 @@ setup(
     "pandas",
     "numpy",
     "h5py",
-    "torchvision"
+    "torchvision",
+    "simplejson"
   ],
   dependency_links=[
     "http://download.pytorch.org/whl/cu80/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl",
