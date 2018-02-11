@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-import requests
+import requests, simplejson as json
 import cli.config as config
 from cli.utils.logger import logger
 from cli.utils.timer import ReturnTimer
@@ -59,15 +59,16 @@ class BaseService:
     
     try:
       if request.method == "post":
-        return requests.post(endpoint, json=request.data, headers=request.headers).json()
+        request.headers["Content-Type"] = "application/json"
+        return requests.post(endpoint, data=json.dumps(request.data, use_decimal=True), headers=request.headers).json()
         
       elif request.method == "get":
         return requests.get(endpoint, params=request.data, headers=request.headers).json()    
           
-    except:
+    except Exception as e:
       def retry_request():
         return cls._request(request, init_request=False)
-        
+      
       if init_request: logger.error("Lost connection to Doppler, trying to reestablish...")
       response = ReturnTimer(config.provider_availability_backoff, retry_request).start()
       if init_request: logger.info("Restored connection to Doppler")
