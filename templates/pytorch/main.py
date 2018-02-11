@@ -76,7 +76,7 @@ class ModelInterface():
     scores = softmax(predictions, dim=1).data.numpy().reshape(-1)
     top_classes = 5  # The top k classes to select.
     indicies = np.argpartition(scores, -top_classes)[-top_classes:]
-    results = [{'label': self.labels[i], 'score': Decimal(str(scores[i]))} for i in indicies]
+    results = [{'label': self.labels[i].lower(), 'score': Decimal(str(scores[i]))} for i in indicies]
     return {
       "predictions": sorted(results, key=lambda result: result["score"], reverse=True)
     }
