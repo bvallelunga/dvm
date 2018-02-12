@@ -15,7 +15,7 @@ def testImage():
 
 try:
     response = requests.post(
-        url="https://api.doppler.market/v1/apps/4/models/8/prediction",
+        url="https://api.doppler.market/v1/apps/vgg16/models/8/prediction",
         headers={
             "Content-Type": "application/json; charset=utf-8",
             "access-token": "okximez4eaz53cpoikvalfswkrog9qgs4rfbwfp0",
