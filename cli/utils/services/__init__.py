@@ -65,7 +65,7 @@ class BaseService:
       elif request.method == "get":
         return requests.get(endpoint, params=request.data, headers=request.headers).json()    
           
-    except Exception as e:
+    except requests.exceptions.RequestException:
       def retry_request():
         return cls._request(request, init_request=False)
       
