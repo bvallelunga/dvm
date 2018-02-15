@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from cli.utils.models.task import Task
 from cli.utils.services.task import TaskService
 from threading import Thread
-import json, importlib.util, requests, traceback
+import json, importlib.util, requests
 
 
 class Worker():
@@ -49,12 +49,16 @@ class Worker():
       interface = self.interfaces[app_id][model_id]
       
       TaskService.send(
-        method = task.callback.method,
-        endpoint = task.callback.url,
+        method = task.callbacks.success.method,
+        endpoint = task.callbacks.success.url,
         output = interface.prediction(task.input)
       )
     
-    except Exception as e:
-      traceback.print_exc()
+    except Exception as e:      
+      TaskService.error(
+        method = task.callbacks.error.method,
+        endpoint = task.callbacks.error.url,
+        message = str(e)
+      )
       
     self.queue.task_done()
