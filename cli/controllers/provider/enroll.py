@@ -72,7 +72,7 @@ class ProviderEnrollController(CementBaseController):
     
     with open(zipfilePath, 'wb') as f:
       for block in response.iter_content(1024):
-        f.write(block) 
+        if block: f.write(block) 
       f.close()
       
     # Unzip app
