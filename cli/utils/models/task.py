@@ -11,6 +11,18 @@ class TaskCallback(models.Base):
       method = json["method"],
       url = json["url"]
     )
+    
+    
+class TaskCallbacks(models.Base):
+  success = fields.EmbeddedField(TaskCallback, required=True)
+  error = fields.EmbeddedField(TaskCallback, required=True)
+  
+  @staticmethod
+  def build(json):
+    return TaskCallbacks(
+      success = TaskCallback.build(json["success"]),
+      error = TaskCallback.build(json["error"])
+    )
   
 
 class Task(models.Base):
@@ -19,7 +31,7 @@ class Task(models.Base):
   app_id = fields.IntField()
   model_id = fields.IntField()
   input = None
-  callback = fields.EmbeddedField(TaskCallback, required=True)
+  callbacks = fields.EmbeddedField(TaskCallbacks, required=True)
   
   @staticmethod
   def build(json):
@@ -28,7 +40,7 @@ class Task(models.Base):
       provider_id = json["provider_id"],
       app_id = json["app_id"],
       model_id = json["model_id"],
-      callback = TaskCallback.build(json["callback"]),
+      callbacks = TaskCallbacks.build(json["callbacks"]),
     )
     
     prediction.input = json["input"]

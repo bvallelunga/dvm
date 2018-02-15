@@ -10,6 +10,8 @@ from cli.utils.store import store
 from cli.controllers import BaseController
 from cli.controllers.auth import AuthController
 from cli.controllers.provider import ProviderController
+from cli.controllers.provider import ProviderController
+from cli.controllers.upgrade import UpgradeController
 
 
 class App(CementApp):
@@ -22,7 +24,8 @@ class App(CementApp):
     handlers = [
       BaseController,
       AuthController,
-      ProviderController
+      ProviderController,
+      UpgradeController
     ]
     
   store = store

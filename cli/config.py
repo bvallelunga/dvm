@@ -1,8 +1,10 @@
 import os
 
+# Upgrade
+pip_package = "git+git://github.com/DopplerFoundation/dvm.git"
+
 # API host 
 host = os.getenv('DVM_HOST', "https://api.doppler.market")
-
 
 # Local datastore
 local_directory = os.path.expanduser("~/.dvm/")
