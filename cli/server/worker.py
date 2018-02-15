@@ -38,7 +38,7 @@ class Worker():
   def worker(self):
     while True:
       input = self.queue.get()
-      if input not None:
+      if input is not None:
         task = Task.build(input)
         self.task(task)
       self.queue.task_done()
