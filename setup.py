@@ -20,9 +20,9 @@ setup(
   packages=find_packages(exclude=["tests", "templates", "experiments"]),
   install_requires=[
     "requests==2.18.4",
-    "cement==2.11.1",
+    "cement",
     "colorlog==3.1.2",
-    "jsonmodels==2.8",
+    "jsonmodels",
     "tabulate==0.8.2",
     "flask==0.12.2",
     "persist-queue==0.2.1",
