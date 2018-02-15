@@ -20,6 +20,7 @@ class ProviderServerController(CementBaseController):
       (['--port'], dict(action='store', help="Should match the endpoint's port from registration.", default=config.provider_port, dest="port")),
       (['--detached'], dict(action='store_true', help="Run server in background mode.", dest="detached")),
       (['--kill'], dict(action='store_true', help="Kill an active detached server.", dest="kill")),
+      (['--ignore-checks'], dict(action='store_true', help="", dest="ignore_checks")),
       (['--flask-debug'], dict(action='store_true', help="Run flask in debug mode.", dest="flask_debug"))
     ]
    
@@ -34,13 +35,13 @@ class ProviderServerController(CementBaseController):
       sys.exit(0)
     
     # Check If a Detached Server Exists
-    if os.path.isfile(config.server_pid):
+    if not self.app.pargs.ignore_checks and os.path.isfile(config.server_pid):
       self.app.log.error("A detached server already exists. Please kill it [dvm server --kill] if you would like to create another server.")
       sys.exit(0)
     
     # Deteched Server
     if self.app.pargs.detached:
-      cmd = 'nohup dvm server --host={} --port={} > {} 2> {} & echo $! > {}'.format(
+      cmd = 'nohup dvm server --host={} --port={} --ignore-checks > {} 2> {} & echo $! > {}'.format(
         self.app.pargs.host, 
         self.app.pargs.port, 
         config.server_out_log, 
