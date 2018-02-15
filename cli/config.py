@@ -10,7 +10,10 @@ host = os.getenv('DVM_HOST', "https://api.doppler.market")
 local_directory = os.path.expanduser("~/.dvm/")
 store_db = os.path.join(local_directory, "store.db")
 app_store = os.path.join(local_directory, "apps")
-queue_db = os.path.join(local_directory, "queue.db")
+queue_db = os.path.join(local_directory, "queue")
+server_out_log = os.path.join(local_directory, "out.log")
+server_error_log = os.path.join(local_directory, "error.log")
+server_pid = os.path.join(local_directory, "dvm.pid")
 
 # How many of the latests model
 # versions to support per app

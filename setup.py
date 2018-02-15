@@ -20,9 +20,9 @@ setup(
   packages=find_packages(exclude=["tests", "templates", "experiments"]),
   install_requires=[
     "requests==2.18.4",
-    "cement==2.11.1",
+    "cement",
     "colorlog==3.1.2",
-    "jsonmodels==2.8",
+    "jsonmodels",
     "tabulate==0.8.2",
     "flask==0.12.2",
     "persist-queue==0.2.1",
@@ -30,7 +30,7 @@ setup(
     "scikit-learn==0.19.1",
     "pandas==0.22.0",
     "numpy==1.12.0",
-    "h5py==2.7.1",
+    #"h5py==2.7.1",
     "torchvision",
     "simplejson==3.13.2"
   ],
