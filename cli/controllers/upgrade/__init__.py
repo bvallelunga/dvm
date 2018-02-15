@@ -12,4 +12,4 @@ class UpgradeController(CementBaseController):
   
   @expose(help="Upgrade [dvm] command line interface")
   def upgrade(self):
-    os.system('pip3 install --upgrade  --user {}'.format(config.pip_package))
+    os.system('pip3 install --upgrade --user {}'.format(config.pip_package))
