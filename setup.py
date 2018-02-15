@@ -30,7 +30,7 @@ setup(
     "scikit-learn==0.19.1",
     "pandas==0.22.0",
     "numpy==1.12.0",
-    #"h5py==2.7.1",
+    "h5py==2.7.1",
     "torchvision",
     "simplejson==3.13.2"
   ],
