@@ -38,8 +38,10 @@ class Worker():
   def worker(self):
     while True:
       input = self.queue.get()
-      task = Task.build(input)
-      self.task(task)
+      if input not None:
+        task = Task.build(input)
+        self.task(task)
+      self.queue.task_done()
 
 
   def task(self, task):
@@ -60,5 +62,3 @@ class Worker():
         endpoint = task.callbacks.error.url,
         message = str(e)
       )
-      
-    self.queue.task_done()
