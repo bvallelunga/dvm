@@ -23,7 +23,7 @@ class App(models.Base):
   name = fields.StringField(required=True)
   description = fields.StringField(required=True)
   created_at = fields.DateTimeField(required=True)
-  predictions = fields.EmbeddedField(AppMetrics, required=True)
+  tasks = fields.EmbeddedField(AppMetrics, required=True)
   
   @staticmethod
   def build(json):
@@ -35,5 +35,5 @@ class App(models.Base):
       name = json["name"],
       description = json["description"],
       created_at = json["created_at"],
-      predictions = AppMetrics.build(json["predictions"])
+      tasks = AppMetrics.build(json["tasks"])
     )

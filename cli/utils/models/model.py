@@ -48,7 +48,7 @@ class Model(models.Base):
   output_scheme = None
   created_at = fields.DateTimeField(required=True)
   urls = fields.EmbeddedField(ModelUrls, required=True)
-  predictions = fields.EmbeddedField(ModelMetrics, required=True)
+  tasks = fields.EmbeddedField(ModelMetrics, required=True)
   stats = fields.EmbeddedField(ModelStats, required=True)
   
   @staticmethod
@@ -60,7 +60,7 @@ class Model(models.Base):
       update_notes = json["update_notes"],
       urls = ModelUrls.build(json["urls"]),
       created_at = json["created_at"],
-      predictions = ModelMetrics.build(json["predictions"]),
+      tasks = ModelMetrics.build(json["tasks"]),
       stats = ModelStats.build(json["stats"])
     )
     model.input_scheme = json["input_scheme"]
