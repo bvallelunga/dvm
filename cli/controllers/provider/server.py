@@ -44,8 +44,8 @@ class ProviderServerController(CementBaseController):
       cmd = 'nohup dvm server --host={} --port={} --ignore-checks > {} 2> {} & echo $! > {}'.format(
         self.app.pargs.host, 
         self.app.pargs.port, 
-        config.server_out_log, 
-        config.server_error_log,
+        config.server_error_log, 
+        config.server_out_log,
         config.server_pid
       )
       process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -64,7 +64,6 @@ class ProviderServerController(CementBaseController):
    
   def availability_ping(self):
     provider = ProviderService.availability(True)
-
     if not provider: sys.exit(0)
         
     seconds_diff = (provider.available_expires_at - datetime.now(timezone.utc)).total_seconds()
