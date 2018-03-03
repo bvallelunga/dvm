@@ -14,7 +14,8 @@ class ProviderEnrollController(CementBaseController):
     description = 'Enroll provider in app'
     arguments = [
       (['--app', '-a'], dict(action='store', help="App ID to enroll in", dest="app")),
-      (['--versions', '-v'], dict(action='store', help="Number of versions back to download", default=config.apps_supported_versions, dest="versions"))
+      (['--versions', '-v'], dict(action='store', help="Number of versions back to download", default=config.apps_supported_versions, dest="versions")),
+      (['--model', '-m'], dict(action='store', help="Specific model to download", dest="model"))
     ]
    
   
@@ -38,11 +39,25 @@ class ProviderEnrollController(CementBaseController):
     
     self.app.log.info("Enrolled in app {}".format(app_id))
     
-    # Enroll models
-    versions = int(self.app.pargs.versions)
     
-    for model in models[0:versions]:
-      self.enroll_model(model, app_store)
+    # Enroll models
+    if self.app.pargs.model:
+      model_id = int(self.app.pargs.model)
+      model_found = False
+      
+      for model in models:
+        if model.version == model_id:
+          model_found = True
+          self.enroll_model(model, app_store)
+          
+      if not model_found:
+        return self.app.log.warning("Model {} was not found".format(model_id))
+      
+    else: 
+      versions = int(self.app.pargs.versions)
+  
+      for model in models[0:versions]:
+        self.enroll_model(model, app_store)
     
     # Finish
     apps_store[app_id] = app_store
