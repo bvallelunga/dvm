@@ -43,7 +43,6 @@ class Model(models.Base):
   app_id = fields.IntField(required=True)
   version = fields.IntField(required=True)
   enrolled_providers = fields.IntField()
-  update_notes = fields.StringField(required=True)
   input_scheme = None
   output_scheme = None
   created_at = fields.DateTimeField(required=True)
@@ -57,7 +56,6 @@ class Model(models.Base):
       app_id = json["app_id"],
       version = json["version"],
       enrolled_providers = json["enrolled_providers"],
-      update_notes = json["update_notes"],
       urls = ModelUrls.build(json["urls"]),
       created_at = json["created_at"],
       tasks = ModelMetrics.build(json["tasks"]),
