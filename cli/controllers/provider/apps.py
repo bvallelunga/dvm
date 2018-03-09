@@ -28,7 +28,7 @@ class ProviderAppsController(CementBaseController):
         data.append([
           app.id,
           app.name,
-          app.description,
+          app.description_short,
           app.versions,
           app.enrolled_providers
         ])

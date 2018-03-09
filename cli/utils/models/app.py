@@ -22,6 +22,7 @@ class App(models.Base):
   versions = fields.IntField()
   name = fields.StringField(required=True)
   description = fields.StringField(required=True)
+  description_short = fields.StringField(required=True)
   created_at = fields.DateTimeField(required=True)
   tasks = fields.EmbeddedField(AppMetrics, required=True)
   
@@ -34,6 +35,7 @@ class App(models.Base):
       versions = json["versions"],
       name = json["name"],
       description = json["description"],
+      description_short = json["description"].strip().split(".")[0][0:70] + ".",
       created_at = json["created_at"],
       tasks = AppMetrics.build(json["tasks"])
     )
