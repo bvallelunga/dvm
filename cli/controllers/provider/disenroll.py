@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.utils.services.provider import ProviderService
+from cli.utils.services.app import AppService
 import cli.config as config
 import requests, os, shutil
 
@@ -23,10 +24,14 @@ class ProviderDisenrollController(CementBaseController):
     
     if not app_id:
       return self.app.log.error("Please provide an app id")
-           
-    if self.disenroll_app(app_id):
-      self.delete_models(app_id)
-      self.app.log.info("Disenrolled in app {}".format(app_id))
+      
+    app = AppService.fetch(app_id)
+    if not app: return self.app.log.error("App id invalid")
+               
+    if self.disenroll_app(app.id):
+      self.delete_models(str(app.id))
+      self.delete_models(app.slug)
+      self.app.log.info("Disenrolled in app {}".format(app.slug))
     
   
   def disenroll_app(self, app_id):    

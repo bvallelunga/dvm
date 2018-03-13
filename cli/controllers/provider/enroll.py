@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.utils.services.provider import ProviderService
+from cli.utils.services.app import AppService
 import cli.config as config
 import requests, os, zipfile
 
@@ -26,7 +27,11 @@ class ProviderEnrollController(CementBaseController):
        
     if not app_id:
       return self.app.log.error("Please provide an app id")
+      
+    app = AppService.fetch(app_id)
+    if not app: return self.app.log.error("App id invalid")
     
+    app_id = str(app.id)
     apps_store = self.app.store.get("apps", {})
     app_store = apps_store[app_id] if app_id in apps_store else {}
     
@@ -37,7 +42,7 @@ class ProviderEnrollController(CementBaseController):
     if len(models) == 0:
       return self.app.log.warning("App does not have any models to download")
     
-    self.app.log.info("Enrolled in app {}".format(app_id))
+    self.app.log.info("Enrolled in app {}".format(app.slug))
     
     
     # Enroll models

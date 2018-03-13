@@ -17,6 +17,7 @@ class AppMetrics(models.Base):
 
 class App(models.Base):
   id = fields.IntField(required=True)
+  slug = fields.StringField(required=True)
   category_id = fields.IntField()
   enrolled_providers = fields.IntField()
   versions = fields.IntField()
@@ -30,6 +31,7 @@ class App(models.Base):
   def build(json):
     return App(
       id = json["id"],
+      slug = json["slug"],
       category_id = json["category_id"],
       enrolled_providers = json["enrolled_providers"],
       versions = json["versions"],
