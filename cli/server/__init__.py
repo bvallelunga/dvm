@@ -5,11 +5,12 @@ from cli.utils.store import store
 from persistqueue import FIFOSQLiteQueue
 from cli.server.worker import Worker
 import cli.config as config
-import json
+import simplejson as json
 
 server = Flask(__name__)
 apps = None
 queue = None
+worker = None
 
 @server.route('/prediction', methods=['POST'])
 def revieve_prediction():
@@ -25,8 +26,21 @@ def revieve_prediction():
   if str(task.model_id) not in apps[str(task.app_id)]:
     return error_handler("provider is not enrolled in model")
   
-  queue.put(data)
-  return json.dumps({ "success": True })
+  if config.provider_use_queue:
+    queue.put(data)
+    return json.dumps({ "success": True })
+  
+  try:
+    return json.dumps({ 
+      "success": True,
+      "output": worker.predict(task)
+    })
+    
+  except Exception as e:  
+    return json.dumps({
+      "success": False,
+      "error": str(e)
+    }, use_decimal=True)
   
 
 def error_handler(error):  
@@ -34,7 +48,7 @@ def error_handler(error):
     json.dumps({
       "success": False,
       "error": error
-    }), 
+    }, use_decimal=True), 
     403
   )
   
@@ -42,8 +56,13 @@ def error_handler(error):
 def run(host, port, debug):
   global apps
   global queue
+  global worker
   
   apps = store.get("apps", {})
   queue = FIFOSQLiteQueue(path=config.queue_db, multithreading=True)
-  Worker(queue, store).start()
+  worker = Worker(queue, store)
+  
+  if config.provider_use_queue:
+    worker.start()
+  
   server.run(host=host, port=port, debug=debug)

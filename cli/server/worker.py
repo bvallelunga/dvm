@@ -42,18 +42,21 @@ class Worker():
         task = Task.build(input)
         self.task(task)
       self.queue.task_done()
-
+      
+      
+  def predict(self, task):
+    app_id = str(task.app_id)
+    model_id = str(task.model_id)
+    interface = self.interfaces[app_id][model_id]
+    return interface.prediction(task.input)
+  
 
   def task(self, task):
-    try:
-      app_id = str(task.app_id)
-      model_id = str(task.model_id)
-      interface = self.interfaces[app_id][model_id]
-      
+    try:      
       TaskService.send(
         method = task.callbacks.success.method,
         endpoint = task.callbacks.success.url,
-        output = interface.prediction(task.input)
+        output = self.predict(task)
       )
     
     except Exception as e:      
