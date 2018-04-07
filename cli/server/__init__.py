@@ -13,7 +13,7 @@ queue = None
 worker = None
 
 @server.route('/prediction', methods=['POST'])
-def revieve_prediction():
+def receive_prediction():
   if request.headers.get('access-token') != store.get("access-token"):
     return error_handler("Invalid access-token")
   
