@@ -36,8 +36,8 @@ class App(models.Base):
       enrolled_providers = json["enrolled_providers"],
       versions = json["versions"],
       name = json["name"],
-      description = json["description"],
-      description_short = json["description"].strip().split(".")[0][0:70] + ".",
+      description = json["description"]["plain"],
+      description_short = json["description"]["plain"].strip().split(".")[0][0:70] + ".",
       created_at = json["created_at"],
       tasks = AppMetrics.build(json["tasks"])
     )
