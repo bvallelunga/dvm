@@ -24,7 +24,7 @@ def receive_prediction():
     return error_handler("Provider is not enrolled in this app")
   
   if str(task.model_id) not in apps[str(task.app_id)]:
-    return error_handler("provider is not enrolled in model")
+    return error_handler("Provider is not enrolled in model")
   
   if config.provider_use_queue:
     queue.put(data)
