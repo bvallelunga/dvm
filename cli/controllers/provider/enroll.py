@@ -79,7 +79,7 @@ class ProviderEnrollController(CementBaseController):
     
   def enroll_model(self, model, app_store):
     # Download app
-    response = requests.get(config.host + model.urls.tensorflow, stream=True, allow_redirects=True, headers={
+    response = requests.get(config.host + model.urls.raw, stream=True, allow_redirects=True, headers={
       "access-token": self.app.store.get("access-token")
     })
     response.raise_for_status()
