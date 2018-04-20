@@ -9,41 +9,40 @@ class AuthLoginController(CementBaseController):
     stacked_on = 'auth'
     stacked_type = 'nested'
     usage = 'dvm login [arguments...]'
-    description = 'Login by using your wallet address. If a provider id is not given, an account will be created.'
+    description = 'Login by using your access token.'
     arguments = [
-      (['--wallet', '-w'], dict(action='store', help="REQUIRED: DOP Wallet Address", dest="wallet")),
-      (['--endpoint', '-e'], dict(action='store', help="OPTIONAL: Endpoint for Doppler to contact your server", dest="endpoint")),
-      (['--provider', '-p'], dict(action='store', help="OPTIONAL: Provider ID, must be owned by the wallet", dest="provider")),
+      (['--access-token', '-w'], dict(action='store', help="REQUIRED: Access Token", dest="access_token")),
+      (['--endpoint', '-e'], dict(action='store', help="REQUIRED: Endpoint for Doppler to contact your server", dest="endpoint")),
     ]
-   
-  
+
+
   @expose(hide=True)
-  def default(self):    
-    if not self.app.pargs.wallet:
-      self.app.log.error("Wallet address is missing")
+  def default(self):
+    if not self.app.pargs.access_token:
+      self.app.log.error("Access token field is missing")
       self.app.args.print_help()
       return
-    
+
+
+    if not self.app.pargs.endpoint:
+        self.app.log.error("Endpoint field is missing")
+        self.app.args.print_help()
+        return
+
     old_access_token = self.app.store.get("access-token")
     old_provider = self.app.store.get("provider")
-    self.app.store.set("access-token", self.app.pargs.wallet)
-    
-    if self.app.pargs.provider:
-      self.app.store.set("provider", self.app.pargs.provider) 
-    
-    else:
-      provider = ProviderService.register(
-        endpoint = self.app.pargs.endpoint 
-      )
-      
-      if not provider: 
+    self.app.store.set("access-token", self.app.pargs.access_token)
+
+    provider = ProviderService.register(
+        endpoint = self.app.pargs.endpoint
+    )
+
+    if not provider:
         self.app.store.set("access-token", old_access_token)
         self.app.store.set("provider", old_provider)
         self.app.args.print_help()
         return
-      
-      self.app.store.set("provider", provider.id)
-    
+
+    self.app.store.set("provider", provider.id)
     self.app.store.set("apps", {})
-    self.app.log.info("Wallet address stored locally")
-    self.app.log.info("Provider attached to your user account")
+    self.app.log.info("You have logged in successfully!")

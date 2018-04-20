@@ -11,26 +11,18 @@ class AuthController(CementBaseController):
     label = 'auth'
     stacked_on = 'base'
 
-  
+
   def _setup(self, app):
     super(AuthController, self)._setup(app)
     app.handler.register(AuthRegisterController)
     app.handler.register(AuthLoginController)
-    
-  
-  @expose(help="Generate a DOP wallet")
-  def generate_wallet(self):
-    wallet = WalletService.generate()
-    self.app.log.info("Wallet Address: " + wallet.address)
-    self.app.log.info("Private Key: " + wallet.private_key)
-    
-    
-  @expose(help="Your wallet address")
-  def wallet(self):
+
+
+  @expose(help="Your access token")
+  def access_token(self):
     token = self.app.store.get("access-token")
-    
+
     if token:
       self.app.log.info("Wallet Address: " + token)
     else:
       ProviderService.login_error()
-    

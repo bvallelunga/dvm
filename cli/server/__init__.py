@@ -13,7 +13,7 @@ queue = None
 worker = None
 
 @server.route('/prediction', methods=['POST'])
-def revieve_prediction():
+def receive_prediction():
   if request.headers.get('access-token') != store.get("access-token"):
     return error_handler("Invalid access-token")
   
@@ -24,7 +24,7 @@ def revieve_prediction():
     return error_handler("Provider is not enrolled in this app")
   
   if str(task.model_id) not in apps[str(task.app_id)]:
-    return error_handler("provider is not enrolled in model")
+    return error_handler("Provider is not enrolled in model")
   
   if config.provider_use_queue:
     queue.put(data)
