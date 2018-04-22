@@ -47,7 +47,7 @@ def main(args=None):
     app.close()
     
   except Exception as e:
-    traceback.format_exc()
+    print(traceback.format_exc())
     
 
 if __name__ == "__main__":

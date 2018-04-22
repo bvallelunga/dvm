@@ -19,15 +19,15 @@ class ProviderAppsController(CementBaseController):
     if len(app_keys) == 0:
       return self.app.log.error("Please enroll in at least one app first.\n$ dvm provider enroll")
     
-    headers=['ID', 'NAME', 'DESCRIPTION', 'VERSIONS', 'PROVIDERS']
+    headers=['SLUG', 'DESCRIPTION', 'VERSIONS', 'PROVIDERS']
     data=[]
     
     for id in app_keys:
       app = AppService.fetch(id)
+      print(123)
       if app: 
         data.append([
-          app.id,
-          app.name,
+          app.slug,
           app.description_short,
           app.versions,
           app.enrolled_providers
