@@ -28,7 +28,12 @@ class Store:
   def set(self, key, value):
     self.datastore[key] = value
     self._update()
-    
+  
+  
+  def delete(self, key):
+    self.datastore.pop(key, None)
+    self._update()
+  
   
   def _update(self):
     with open(config.store_db, 'w') as f:

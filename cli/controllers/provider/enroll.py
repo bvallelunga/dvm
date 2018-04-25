@@ -3,7 +3,7 @@ from cement.core.controller import CementBaseController, expose
 from cli.utils.services.provider import ProviderService
 from cli.utils.services.app import AppService
 import cli.config as config
-import requests, os, zipfile
+import requests, os, zipfile, subprocess, sys
 
 
 class ProviderEnrollController(CementBaseController):
@@ -105,6 +105,18 @@ class ProviderEnrollController(CementBaseController):
     os.remove(zipfilePath)
     
     app_store[model.version] = folderPath
+    
+    # Dependencies
+    requirements_path = "{}/requirements.txt".format(folderPath)
+    if os.path.isfile(requirements_path):
+      cmd = "pip install -U -r {}".format(requirements_path)
+      process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+      while True:
+        output = process.stdout.readline()
+        if output == '' or process.poll() is not None:
+          break
+        if output:
+          print(output.strip().decode('ascii'))
     
     # Enroll model
     ProviderService.enroll_model(
