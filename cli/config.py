@@ -17,7 +17,7 @@ server_pid = os.path.join(local_directory, "dvm.pid")
 
 # How many of the latests model
 # versions to support per app
-apps_supported_versions = 5
+apps_supported_versions = 1
 
 # Provider server port
 provider_host = "0.0.0.0"

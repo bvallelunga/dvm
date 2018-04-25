@@ -30,12 +30,12 @@ class ModelStats(models.Base):
     
     
 class ModelUrls(models.Base):
-  tensorflow = fields.StringField(required=True)
+  raw = fields.StringField(required=True)
   
   @staticmethod
   def build(json):
     return ModelUrls(
-      tensorflow = json["tensorflow"],
+      raw = json["raw"],
     )
   
 

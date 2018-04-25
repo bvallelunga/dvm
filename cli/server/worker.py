@@ -23,7 +23,9 @@ class Worker():
     
     for app, models in self.interfaces.items():    
       for model, path in models.items():
-        spec = importlib.util.spec_from_file_location("{}.{}".format(app, model), "{}/main.py".format(path))
+        json_data=open("{}/package.json".format(path)).read()
+        package_json = json.loads(json_data)
+        spec = importlib.util.spec_from_file_location("{}.{}".format(app, model), "{}/{}".format(path, package_json["main"]))
         interface = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(interface)
         self.interfaces[app][model] = interface.ModelInterface()
