@@ -24,7 +24,6 @@ class ProviderAppsController(CementBaseController):
     
     for id in app_keys:
       app = AppService.fetch(id)
-      print(123)
       if app: 
         data.append([
           app.slug,
