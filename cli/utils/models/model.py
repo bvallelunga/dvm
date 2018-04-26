@@ -61,6 +61,6 @@ class Model(models.Base):
       tasks = ModelMetrics.build(json["tasks"]),
       stats = ModelStats.build(json["stats"])
     )
-    model.input_scheme = json["input_scheme"]
-    model.output_scheme = json["output_scheme"]
+    model.input_scheme = json["schemes"]["input"]
+    model.output_scheme = json["schemes"]["output"]
     return model
