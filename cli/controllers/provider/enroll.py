@@ -109,7 +109,7 @@ class ProviderEnrollController(CementBaseController):
     # Dependencies
     requirements_path = "{}/requirements.txt".format(folderPath)
     if os.path.isfile(requirements_path):
-      cmd = "pip install -U -r {}".format(requirements_path)
+      cmd = "pip3 install --user -r {}".format(requirements_path)
       process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
       while True:
         output = process.stdout.readline()
