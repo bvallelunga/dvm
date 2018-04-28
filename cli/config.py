@@ -1,7 +1,7 @@
 import os
 
 # Upgrade
-pip_package = "git+git://github.com/DopplerFoundation/dvm.git"
+pip_package = "git+https://github.com/DopplerFoundation/dvm.git"
 
 # API host 
 host = os.getenv('DVM_HOST', "https://api.doppler.market")
