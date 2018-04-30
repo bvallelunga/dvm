@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.utils.services.provider import ProviderService
+from cli.config import config
 
 
 class AuthLoginController(CementBaseController):
@@ -34,7 +35,7 @@ class AuthLoginController(CementBaseController):
     self.app.store.set("access-token", self.app.pargs.access_token)
 
     provider = ProviderService.register(
-        endpoint = self.app.pargs.endpoint
+        endpoint = "{}:{}".format(self.app.pargs.endpoint, config.provider_port)
     )
 
     if not provider:
