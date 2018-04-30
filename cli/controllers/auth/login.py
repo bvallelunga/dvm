@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from cement.core.controller import CementBaseController, expose
 from cli.utils.services.provider import ProviderService
-from cli.config import config
+import cli.config as config
 
 
 class AuthLoginController(CementBaseController):
