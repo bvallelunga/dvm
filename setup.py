@@ -26,12 +26,6 @@ setup(
     "tabulate",
     "flask",
     "persist-queue",
-    "keras",
-    "scikit-learn",
-    "scipy",
-    "pandas",
-    "numpy",
-    "torchvision",
     "simplejson"
   ],
   dependency_links=[
