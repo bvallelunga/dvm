@@ -61,7 +61,7 @@ class ProviderServerController(CementBaseController):
     apps = self.app.store.get("apps", {})
     
     if len(apps.keys()) == 0:
-      return self.app.log.error("Please enroll in at least one app first.\n$ dvm provider enroll")
+      return self.app.log.error("Please enroll in at least one app first.\n$ dvm enroll")
     
     # If is detached server
     if True or self.app.pargs.ignore_checks:
