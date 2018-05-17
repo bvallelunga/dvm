@@ -42,7 +42,6 @@ class ModelUrls(models.Base):
 class Model(models.Base):
   app_id = fields.IntField(required=True)
   version = fields.IntField(required=True)
-  enrolled_providers = fields.IntField()
   input_scheme = None
   output_scheme = None
   created_at = fields.DateTimeField(required=True)
@@ -55,7 +54,6 @@ class Model(models.Base):
     model = Model(
       app_id = json["app_id"],
       version = json["version"],
-      enrolled_providers = json["enrolled_providers"],
       urls = ModelUrls.build(json["urls"]),
       created_at = json["created_at"],
       tasks = ModelMetrics.build(json["tasks"]),
