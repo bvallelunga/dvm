@@ -17,7 +17,7 @@ class ProviderAppsController(CementBaseController):
     app_keys = apps_store.keys()
     
     if len(app_keys) == 0:
-      return self.app.log.error("Please enroll in at least one app first.\n$ dvm provider enroll")
+      return self.app.log.error("Please enroll in at least one app first.\n$ dvm enroll")
     
     headers=['SLUG', 'DESCRIPTION', 'VERSIONS']
     data=[]
